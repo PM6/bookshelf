@@ -1,19 +1,25 @@
 import styled from '@emotion/styled'
 import {Dialog as ReachDialog} from '@reach/dialog'
 
-// 🐨 create a button styled component here called "Button"
-// make it look nice and allow it to support a "variant" prop which can be
-// either "primary" or "secondary".
-const Button = styled.button(props => {
-  return {
+const buttonVariants = {
+  primary: {
+    background: '#3f51b5',
+    color: 'white',
+  },
+  secondary: {
+    background: '#f1f2f7',
+    color: '#434449',
+  },
+}
+const Button = styled.button(
+  {
     padding: '10px 15px',
     border: '0',
     lineHeight: '1',
     borderRadius: '3px',
-    background: props.variant === 'secondary' ? '#f1f2f7' : '#3f51b5',
-    color: props.variant === 'secondary' ? '#434449' : 'white',
-  }
-})
+  },
+  ({variant = 'primary'}) => buttonVariants[variant],
+)
 
 const Input = styled.input({
   borderRadius: '3px',
@@ -24,7 +30,7 @@ const Input = styled.input({
 
 const FormGroup = styled.div({
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
 })
 
 const CircleButton = styled.button({
