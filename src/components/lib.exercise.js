@@ -73,5 +73,8 @@ const LoadingSpinner = styled(FaSpinner)({
   color: colors.indigo,
   animation: `${spin} 1s linear infinite`,
 })
+LoadingSpinner.defaultProps = {
+  'aria-label': 'loading',
+}
 
 export {CircleButton, Dialog, Button, FormGroup, Input, LoadingSpinner}
