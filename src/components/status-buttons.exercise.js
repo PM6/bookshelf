@@ -89,7 +89,7 @@ function StatusButtons({user, book}) {
           <TooltipButton
             label="Mark as read"
             highlight={colors.green}
-            onClick={() => update({id: listItem.id, finishDate: null})}
+            onClick={() => update({id: listItem.id, finishDate: Date.now()})}
             icon={<FaCheckCircle />}
           />
         )
