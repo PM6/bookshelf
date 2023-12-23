@@ -3,7 +3,7 @@ import './bootstrap'
 import * as React from 'react'
 import {createRoot} from 'react-dom/client'
 import {App} from './app'
-import {ReactQueryConfigProvider} from 'react-query/dist/react-query.development'
+import {ReactQueryConfigProvider} from 'react-query'
 
 const queryConfig = {
   queries: {
