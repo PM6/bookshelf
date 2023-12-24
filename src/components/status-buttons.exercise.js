@@ -49,7 +49,7 @@ function TooltipButton({label, highlight, onClick, icon, ...rest}) {
         aria-label={isError ? error.message : label}
         {...rest}
       >
-        {isLoading ? <Spinner /> : isError ? <FaTimesCircle /> : icon}F
+        {isLoading ? <Spinner /> : isError ? <FaTimesCircle /> : icon}
       </CircleButton>
     </Tooltip>
   )
