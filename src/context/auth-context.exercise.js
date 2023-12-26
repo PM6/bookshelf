@@ -3,26 +3,34 @@ import {jsx} from '@emotion/core'
 
 import * as React from 'react'
 import * as auth from 'auth-provider'
+import {queryCache} from 'react-query'
 import {client} from 'utils/api-client'
 import {useAsync} from 'utils/hooks'
+import {setQueryDataForBook} from 'utils/books'
 import {FullPageSpinner, FullPageErrorFallback} from 'components/lib'
 
-async function getUser() {
+async function bootstrapAppData() {
   let user = null
 
   const token = await auth.getToken()
   if (token) {
-    const data = await client('me', {token})
+    const data = await client('bootstrap', {token})
+    queryCache.setQueryData('list-items', data.listItems, {
+      staleTime: 5000,
+    })
+
+    for (const listItem of data.listItems) {
+      setQueryDataForBook(listItem.book)
+    }
     user = data.user
   }
-
   return user
 }
 
+const appDataPromise = bootstrapAppData()
+
 const AuthContext = React.createContext()
 AuthContext.displayName = 'AuthContext'
-
-const userPromise = getUser()
 
 function AuthProvider(props) {
   const {
@@ -38,7 +46,7 @@ function AuthProvider(props) {
   } = useAsync()
 
   React.useEffect(() => {
-    run(userPromise)
+    run(appDataPromise)
   }, [run])
 
   const login = React.useCallback(
